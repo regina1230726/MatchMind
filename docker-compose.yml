@@ -1,0 +1,16 @@
+# docker-compose.yml
+services:
+  postgres:
+    image: postgres:16
+    container_name: matchmind-postgres
+    environment:
+      POSTGRES_DB: matchmind
+      POSTGRES_USER: regina
+      POSTGRES_PASSWORD: "010520"
+    ports:
+      - "5433:5432"
+    volumes:
+      - matchmind_data:/var/lib/postgresql/data
+
+volumes:
+  matchmind_data:
