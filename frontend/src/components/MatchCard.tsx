@@ -1,4 +1,5 @@
 import type { Match } from "../types/Match";
+import { Link } from "react-router-dom";
 
 interface Props {
     match: Match;
@@ -8,7 +9,10 @@ export default function MatchCard({ match }: Props) {
     const date = new Date(match.matchDate);
 
     return (
-        <div className="rounded-2xl border border-white/10 bg-white/5 p-6 shadow-xl backdrop-blur-md transition hover:-translate-y-1 hover:border-emerald-400/40">
+        <Link
+            to={`/matches/${match.id}`}
+            className="block rounded-2xl border border-white/10 bg-white/5 p-6 shadow-xl backdrop-blur-md transition hover:-translate-y-1 hover:border-emerald-400/40"
+        >
             <div className="grid grid-cols-3 items-center gap-4">
 
                 <div className="flex items-center gap-4">
@@ -63,6 +67,6 @@ export default function MatchCard({ match }: Props) {
                     {match.status}
                 </span>
             </div>
-        </div>
+        </Link>
     );
 }

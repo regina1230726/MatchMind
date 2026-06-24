@@ -4,6 +4,7 @@ import MatchesPage from "./pages/MatchesPage";
 import DashboardPage from "./pages/DashboardPage";
 import PredictionsPage from "./pages/PredictionsPage";
 import TeamsPage from "./pages/TeamsPage";
+import MatchDetailsPage from "./pages/MatchDetailsPage";
 
 export const router = createBrowserRouter([
     {
@@ -21,6 +22,10 @@ export const router = createBrowserRouter([
             {
                 path: "matches",
                 element: <MatchesPage />,
+            },
+            {
+                path: "matches/:id",
+                element: <MatchDetailsPage />,
             },
             {
                 path: "predictions",
