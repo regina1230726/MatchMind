@@ -32,108 +32,106 @@ export default function MatchDetailsPage() {
         <div>
             <Link
                 to="/matches"
-                className="mb-8 inline-block text-sm font-semibold text-emerald-400 hover:text-emerald-300"
+                className="mb-5 inline-block text-sm font-semibold text-emerald-400 hover:text-emerald-300"
             >
                 ← Back to matches
             </Link>
 
-            <header className="mb-10">
+            <header className="mb-6">
                 <p className="mb-2 text-sm font-semibold uppercase tracking-[0.3em] text-emerald-400">
                     Match Details
                 </p>
 
-                <h1 className="text-5xl font-black">
-                    {match.homeTeam.name} vs {match.awayTeam.name}
-                </h1>
+                <div className="flex flex-wrap items-end justify-between gap-4">
+                    <div>
+                        <h1 className="text-4xl font-black">
+                            {match.homeTeam.name} vs {match.awayTeam.name}
+                        </h1>
 
-                <p className="mt-3 text-lg text-slate-400">
-                    {match.stage} • {date.toLocaleDateString("pt-PT")} •{" "}
-                    {date.toLocaleTimeString("pt-PT", {
-                        hour: "2-digit",
-                        minute: "2-digit",
-                    })}
-                </p>
+                        <p className="mt-2 text-slate-400">
+                            {match.stage} • {date.toLocaleDateString("pt-PT")} •{" "}
+                            {date.toLocaleTimeString("pt-PT", {
+                                hour: "2-digit",
+                                minute: "2-digit",
+                            })}
+                        </p>
+                    </div>
+
+                    <span className="rounded-full bg-emerald-500/10 px-4 py-1 text-sm font-semibold text-emerald-400">
+                    {match.status}
+                </span>
+                </div>
             </header>
 
-            <section className="grid gap-6 lg:grid-cols-[1fr_auto_1fr]">
-                <TeamPanel
-                    name={match.homeTeam.name}
-                    code={match.homeTeam.code}
-                    flagUrl={match.homeTeam.flagUrl}
-                    groupName={match.homeTeam.groupName}
-                    fifaRanking={match.homeTeam.fifaRanking}
-                />
+            <section className="grid gap-6 xl:grid-cols-[1fr_1fr]">
+                <div className="grid gap-5">
+                    <CompactTeamPanel
+                        name={match.homeTeam.name}
+                        code={match.homeTeam.code}
+                        flagUrl={match.homeTeam.flagUrl}
+                        groupName={match.homeTeam.groupName}
+                        fifaRanking={match.homeTeam.fifaRanking}
+                    />
 
-                <div className="flex items-center justify-center">
-                    <div className="rounded-full border border-white/10 bg-white/5 px-8 py-3 text-xl font-black text-slate-300">
-                        VS
-                    </div>
+                    <CompactTeamPanel
+                        name={match.awayTeam.name}
+                        code={match.awayTeam.code}
+                        flagUrl={match.awayTeam.flagUrl}
+                        groupName={match.awayTeam.groupName}
+                        fifaRanking={match.awayTeam.fifaRanking}
+                    />
                 </div>
 
-                <TeamPanel
-                    name={match.awayTeam.name}
-                    code={match.awayTeam.code}
-                    flagUrl={match.awayTeam.flagUrl}
-                    groupName={match.awayTeam.groupName}
-                    fifaRanking={match.awayTeam.fifaRanking}
-                />
-            </section>
-
-            <section className="mt-8 rounded-3xl border border-white/10 bg-white/5 p-8 shadow-xl backdrop-blur-md">
-                <div className="mb-6 flex items-center justify-between">
-                    <div>
+                <section className="rounded-3xl border border-white/10 bg-white/5 p-7 shadow-xl backdrop-blur-md">
+                    <div className="mb-6">
                         <h2 className="text-2xl font-black">Prediction</h2>
                         <p className="text-sm text-slate-400">
                             Model probabilities for this match.
                         </p>
                     </div>
 
-                    <span className="rounded-full bg-emerald-500/10 px-4 py-1 text-sm font-semibold text-emerald-400">
-                        {match.status}
-                    </span>
-                </div>
+                    {prediction ? (
+                        <div className="space-y-5">
+                            <ProbabilityBar
+                                label={`${match.homeTeam.name} win`}
+                                value={prediction.homeWinProbability}
+                            />
+                            <ProbabilityBar
+                                label="Draw"
+                                value={prediction.drawProbability}
+                            />
+                            <ProbabilityBar
+                                label={`${match.awayTeam.name} win`}
+                                value={prediction.awayWinProbability}
+                            />
 
-                {prediction ? (
-                    <div className="space-y-5">
-                        <ProbabilityBar
-                            label={`${match.homeTeam.name} win`}
-                            value={prediction.homeWinProbability}
-                        />
-                        <ProbabilityBar
-                            label="Draw"
-                            value={prediction.drawProbability}
-                        />
-                        <ProbabilityBar
-                            label={`${match.awayTeam.name} win`}
-                            value={prediction.awayWinProbability}
-                        />
-
-                        <div className="mt-6 rounded-2xl border border-violet-400/20 bg-violet-500/10 p-5">
-                            <p className="text-sm text-slate-400">
-                                Predicted outcome
-                            </p>
-                            <p className="mt-1 text-2xl font-black text-violet-300">
-                                {prediction.predictedOutcome.replace("_", " ")}
-                            </p>
+                            <div className="mt-6 rounded-2xl border border-violet-400/20 bg-violet-500/10 p-5">
+                                <p className="text-sm text-slate-400">
+                                    Predicted outcome
+                                </p>
+                                <p className="mt-1 text-2xl font-black text-violet-300">
+                                    {prediction.predictedOutcome.replace("_", " ")}
+                                </p>
+                            </div>
                         </div>
-                    </div>
-                ) : (
-                    <p className="text-slate-400">
-                        No prediction available for this match yet.
-                    </p>
-                )}
+                    ) : (
+                        <p className="text-slate-400">
+                            No prediction available for this match yet.
+                        </p>
+                    )}
+                </section>
             </section>
         </div>
     );
 }
 
-function TeamPanel({
-                       name,
-                       code,
-                       flagUrl,
-                       groupName,
-                       fifaRanking,
-                   }: {
+function CompactTeamPanel({
+                              name,
+                              code,
+                              flagUrl,
+                              groupName,
+                              fifaRanking,
+                          }: {
     name: string;
     code: string;
     flagUrl: string;
@@ -141,17 +139,21 @@ function TeamPanel({
     fifaRanking: number;
 }) {
     return (
-        <div className="rounded-3xl border border-white/10 bg-white/5 p-8 shadow-xl backdrop-blur-md">
-            <img
-                src={flagUrl}
-                alt={name}
-                className="mb-6 h-28 w-36 rounded-2xl object-cover shadow-lg"
-            />
+        <div className="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-xl backdrop-blur-md">
+            <div className="flex items-center gap-5">
+                <img
+                    src={flagUrl}
+                    alt={name}
+                    className="h-20 w-28 rounded-2xl object-cover shadow-lg"
+                />
 
-            <h2 className="text-3xl font-black">{name}</h2>
-            <p className="mt-1 text-slate-400">{code}</p>
+                <div>
+                    <h2 className="text-3xl font-black">{name}</h2>
+                    <p className="mt-1 text-slate-400">{code}</p>
+                </div>
+            </div>
 
-            <div className="mt-6 grid grid-cols-2 gap-4">
+            <div className="mt-5 grid grid-cols-2 gap-4">
                 <InfoBox label="Group" value={groupName} />
                 <InfoBox label="FIFA Rank" value={`#${fifaRanking}`} />
             </div>

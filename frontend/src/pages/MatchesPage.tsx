@@ -14,7 +14,7 @@ export default function MatchesPage() {
 
     return (
         <div>
-            <header className="mb-10">
+            <header className="mb-8">
                 <p className="mb-2 text-sm font-semibold uppercase tracking-[0.3em] text-emerald-400">
                     MatchMind
                 </p>
@@ -28,9 +28,9 @@ export default function MatchesPage() {
                 </p>
             </header>
 
-            <section className="space-y-5">
+            <section className="grid gap-5 xl:grid-cols-2">
                 {matches.map(match => (
-                    <MatchCard key={match.id} match={match} />
+                    <MatchCard key={match.id} match={match}/>
                 ))}
             </section>
         </div>
