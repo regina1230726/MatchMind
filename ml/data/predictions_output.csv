@@ -1,0 +1,9 @@
+home_team,away_team,home_win_probability,draw_probability,away_win_probability,predicted_outcome,expected_home_goals,expected_away_goals,predicted_home_score,predicted_away_score
+Portugal,Colombia,0.4817,0.2505,0.2678,HOME_WIN,1.67,1.11,2,1
+Brazil,Argentina,0.2311,0.3279,0.441,AWAY_WIN,1.13,1.72,1,2
+Argentina,France,0.4324,0.3425,0.225,HOME_WIN,1.51,1.07,2,1
+Spain,Uruguay,0.6862,0.1971,0.1167,HOME_WIN,2.26,0.69,2,1
+England,Croatia,0.6041,0.2552,0.1407,HOME_WIN,1.95,0.95,2,1
+Germany,Netherlands,0.5377,0.2252,0.2371,HOME_WIN,1.72,1.18,2,1
+Belgium,Spain,0.2622,0.3074,0.4304,AWAY_WIN,1.09,1.39,1,2
+Portugal,Brazil,0.3711,0.284,0.3449,HOME_WIN,1.48,1.12,2,1
