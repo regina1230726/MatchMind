@@ -23,7 +23,7 @@ export default function MatchDetailsPage() {
     }, [id]);
 
     if (!match) {
-        return <p className="text-slate-400">Loading match...</p>;
+        return <p className="app-muted">Loading match...</p>;
     }
 
     const date = new Date(match.matchDate);
@@ -32,23 +32,23 @@ export default function MatchDetailsPage() {
         <div>
             <Link
                 to="/matches"
-                className="mb-5 inline-block text-sm font-semibold text-emerald-400 hover:text-emerald-300"
+                className="mb-5 inline-block text-sm font-semibold app-kicker hover:text-[#BBE1FA]"
             >
                 ← Back to matches
             </Link>
 
             <header className="mb-6">
-                <p className="mb-2 text-sm font-semibold uppercase tracking-[0.3em] text-emerald-400">
+                <p className="mb-2 text-sm font-semibold uppercase tracking-[0.3em] app-kicker">
                     Match Details
                 </p>
 
                 <div className="flex flex-wrap items-end justify-between gap-4">
                     <div>
-                        <h1 className="text-4xl font-black">
+                        <h1 className="text-4xl font-black text-white">
                             {match.homeTeam.name} vs {match.awayTeam.name}
                         </h1>
 
-                        <p className="mt-2 text-slate-400">
+                        <p className="mt-2 app-muted">
                             {match.stage} • {date.toLocaleDateString("pt-PT")} •{" "}
                             {date.toLocaleTimeString("pt-PT", {
                                 hour: "2-digit",
@@ -57,9 +57,9 @@ export default function MatchDetailsPage() {
                         </p>
                     </div>
 
-                    <span className="rounded-full bg-emerald-500/10 px-4 py-1 text-sm font-semibold text-emerald-400">
-                    {match.status}
-                </span>
+                    <span className="rounded-full app-chip px-4 py-1 text-sm font-semibold">
+                        {match.status}
+                    </span>
                 </div>
             </header>
 
@@ -82,10 +82,13 @@ export default function MatchDetailsPage() {
                     />
                 </div>
 
-                <section className="rounded-3xl border border-white/10 bg-white/5 p-7 shadow-xl backdrop-blur-md">
+                <section className="rounded-3xl app-card p-7">
                     <div className="mb-6">
-                        <h2 className="text-2xl font-black">Prediction</h2>
-                        <p className="text-sm text-slate-400">
+                        <h2 className="text-2xl font-black text-white">
+                            Prediction
+                        </h2>
+
+                        <p className="text-sm app-muted">
                             Model probabilities for this match.
                         </p>
                     </div>
@@ -96,26 +99,29 @@ export default function MatchDetailsPage() {
                                 label={`${match.homeTeam.name} win`}
                                 value={prediction.homeWinProbability}
                             />
+
                             <ProbabilityBar
                                 label="Draw"
                                 value={prediction.drawProbability}
                             />
+
                             <ProbabilityBar
                                 label={`${match.awayTeam.name} win`}
                                 value={prediction.awayWinProbability}
                             />
 
-                            <div className="mt-6 rounded-2xl border border-violet-400/20 bg-violet-500/10 p-5">
-                                <p className="text-sm text-slate-400">
+                            <div className="mt-6 rounded-2xl app-panel p-5">
+                                <p className="text-sm app-muted">
                                     Predicted outcome
                                 </p>
-                                <p className="mt-1 text-2xl font-black text-violet-300">
+
+                                <p className="mt-1 text-2xl font-black app-kicker">
                                     {prediction.predictedOutcome.replace("_", " ")}
                                 </p>
                             </div>
                         </div>
                     ) : (
-                        <p className="text-slate-400">
+                        <p className="app-muted">
                             No prediction available for this match yet.
                         </p>
                     )}
@@ -139,7 +145,7 @@ function CompactTeamPanel({
     fifaRanking: number;
 }) {
     return (
-        <div className="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-xl backdrop-blur-md">
+        <div className="rounded-3xl app-card p-6">
             <div className="flex items-center gap-5">
                 <img
                     src={flagUrl}
@@ -148,8 +154,13 @@ function CompactTeamPanel({
                 />
 
                 <div>
-                    <h2 className="text-3xl font-black">{name}</h2>
-                    <p className="mt-1 text-slate-400">{code}</p>
+                    <h2 className="text-3xl font-black text-white">
+                        {name}
+                    </h2>
+
+                    <p className="mt-1 app-muted">
+                        {code}
+                    </p>
                 </div>
             </div>
 
@@ -163,11 +174,14 @@ function CompactTeamPanel({
 
 function InfoBox({ label, value }: { label: string; value: string }) {
     return (
-        <div className="rounded-2xl border border-white/10 bg-slate-950/40 p-4">
-            <p className="text-xs uppercase tracking-widest text-slate-500">
+        <div className="rounded-2xl app-panel p-4">
+            <p className="text-xs uppercase tracking-widest app-muted">
                 {label}
             </p>
-            <p className="mt-1 text-xl font-bold">{value}</p>
+
+            <p className="mt-1 text-xl font-bold text-white">
+                {value}
+            </p>
         </div>
     );
 }
@@ -178,13 +192,18 @@ function ProbabilityBar({ label, value }: { label: string; value: number }) {
     return (
         <div>
             <div className="mb-2 flex justify-between text-sm">
-                <span className="font-semibold text-slate-300">{label}</span>
-                <span className="font-bold text-white">{percentage}%</span>
+                <span className="font-semibold app-muted">
+                    {label}
+                </span>
+
+                <span className="font-bold text-white">
+                    {percentage}%
+                </span>
             </div>
 
-            <div className="h-3 overflow-hidden rounded-full bg-slate-800">
+            <div className="h-3 overflow-hidden rounded-full app-progress-bg">
                 <div
-                    className="h-full rounded-full bg-gradient-to-r from-emerald-400 to-violet-500"
+                    className="h-full rounded-full app-progress-fill"
                     style={{ width: `${percentage}%` }}
                 />
             </div>

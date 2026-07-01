@@ -1,0 +1,101 @@
+:root {
+    /* Backgrounds */
+    --bg: #101820;
+    --bg-sidebar: #151F28;
+    --surface: #1C2732;
+    --surface-hover: #243342;
+    --surface-dark: #18222C;
+
+    /* Borders */
+    --border: #2D3A46;
+    --border-hover: #3F72AF;
+
+    /* Text */
+    --text: #F9F7F7;
+    --text-muted: #A8B5C3;
+    --text-soft: #D5E6F7;
+
+    /* Accent */
+    --primary: #3282B8;
+    --primary-hover: #3F72AF;
+    --primary-light: #BBE1FA;
+
+    /* Shadows */
+    --shadow: 0 10px 30px rgba(0,0,0,.28);
+}
+
+.app-bg {
+    background: var(--bg);
+    color: var(--text);
+}
+
+.app-main-bg {
+    background: var(--bg);   /* <- sem gradiente */
+}
+
+.app-sidebar {
+    background: var(--bg-sidebar);
+    border-right: 1px solid var(--border);
+}
+
+.app-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+}
+
+.app-card-hover {
+    transition: .25s;
+}
+
+.app-card-hover:hover {
+    background: var(--surface-hover);
+    border-color: var(--primary);
+    transform: translateY(-2px);
+}
+
+.app-panel {
+    background: var(--surface-dark);
+    border: 1px solid var(--border);
+}
+
+.app-kicker {
+    color: var(--primary);
+}
+
+.app-muted {
+    color: var(--text-muted);
+}
+
+.app-soft {
+    color: var(--primary-light);
+}
+
+.app-chip {
+    background: rgba(50,130,184,.18);
+    color: var(--primary-light);
+    border: 1px solid rgba(50,130,184,.35);
+}
+
+.app-progress-bg {
+    background: #131C24;
+}
+
+.app-progress-fill {
+    background: var(--primary);
+}
+
+.app-nav-active {
+    background: var(--primary);
+    color: white;
+    box-shadow: none;
+}
+
+.app-nav-inactive {
+    color: var(--text-muted);
+}
+
+.app-nav-inactive:hover {
+    background: var(--surface-hover);
+    color: white;
+}

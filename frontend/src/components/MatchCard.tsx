@@ -11,14 +11,15 @@ export default function MatchCard({ match }: Props) {
     return (
         <Link
             to={`/matches/${match.id}`}
-            className="group block rounded-2xl border border-white/10 bg-white/5 p-5 shadow-xl backdrop-blur-md transition hover:-translate-y-1 hover:border-emerald-400/50 hover:bg-white/10"
+            className="group block rounded-2xl app-card app-card-hover p-5"
         >
             <div className="mb-4 flex items-center justify-between gap-4">
                 <div>
-                    <p className="text-xs font-semibold uppercase tracking-widest text-emerald-400">
+                    <p className="text-xs font-semibold uppercase tracking-widest app-kicker">
                         {match.stage}
                     </p>
-                    <p className="mt-1 text-sm text-slate-400">
+
+                    <p className="mt-1 text-sm app-muted">
                         {date.toLocaleDateString("pt-PT", {
                             day: "2-digit",
                             month: "short",
@@ -32,7 +33,7 @@ export default function MatchCard({ match }: Props) {
                     </p>
                 </div>
 
-                <span className="rounded-full bg-emerald-500/10 px-3 py-1 text-xs font-semibold text-emerald-400">
+                <span className="rounded-full app-chip px-3 py-1 text-xs font-semibold">
                     {match.status}
                 </span>
             </div>
@@ -44,7 +45,7 @@ export default function MatchCard({ match }: Props) {
                     flagUrl={match.homeTeam.flagUrl}
                 />
 
-                <div className="rounded-full border border-white/10 bg-slate-950/50 px-4 py-2 text-xs font-black text-slate-400">
+                <div className="rounded-full app-panel px-4 py-2 text-xs font-black app-muted">
                     VS
                 </div>
 
@@ -56,7 +57,7 @@ export default function MatchCard({ match }: Props) {
                 />
             </div>
 
-            <div className="mt-5 flex items-center justify-end text-sm font-semibold text-slate-400 transition group-hover:text-emerald-300">
+            <div className="mt-5 flex items-center justify-end text-sm font-semibold app-muted transition group-hover:text-[#BBE1FA]">
                 View details →
             </div>
         </Link>
@@ -89,8 +90,13 @@ function TeamSide({
             )}
 
             <div>
-                <h2 className="text-lg font-black leading-tight">{name}</h2>
-                <p className="text-xs text-slate-400">{code}</p>
+                <h2 className="text-lg font-black leading-tight text-white">
+                    {name}
+                </h2>
+
+                <p className="text-xs app-muted">
+                    {code}
+                </p>
             </div>
 
             {alignRight && (
