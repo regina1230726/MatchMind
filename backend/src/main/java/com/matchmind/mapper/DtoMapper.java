@@ -37,10 +37,19 @@ public class DtoMapper {
         return new PredictionDTO(
                 prediction.getId(),
                 toFootballMatchDTO(prediction.getMatch()),
+
                 prediction.getHomeWinProbability(),
                 prediction.getDrawProbability(),
                 prediction.getAwayWinProbability(),
+
                 prediction.getPredictedOutcome(),
+
+                prediction.getExpectedHomeGoals(),
+                prediction.getExpectedAwayGoals(),
+
+                prediction.getPredictedHomeScore(),
+                prediction.getPredictedAwayScore(),
+
                 prediction.getModelVersion(),
                 prediction.getGeneratedAt()
         );

@@ -34,4 +34,10 @@ public class Prediction {
     private String modelVersion;
 
     private LocalDateTime generatedAt;
+
+    private Double expectedHomeGoals;
+    private Double expectedAwayGoals;
+
+    private Integer predictedHomeScore;
+    private Integer predictedAwayScore;
 }

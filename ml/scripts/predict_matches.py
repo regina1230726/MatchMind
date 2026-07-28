@@ -257,6 +257,7 @@ def predict_matches():
         )
 
         rows.append({
+            "match_id": int(match["match_id"]),
             "home_team": home_team,
             "away_team": away_team,
 

@@ -2,7 +2,7 @@ package com.matchmind.controller;
 
 import com.matchmind.dto.PredictionDTO;
 import com.matchmind.mapper.DtoMapper;
-import com.matchmind.model.Prediction;
+import com.matchmind.service.PredictionGenerationService;
 import com.matchmind.service.PredictionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +16,7 @@ import java.util.List;
 public class PredictionController {
 
     private final PredictionService predictionService;
+    private final PredictionGenerationService predictionGenerationService;
 
     @GetMapping
     public List<PredictionDTO> getAllPredictions() {
@@ -30,5 +31,15 @@ public class PredictionController {
         return DtoMapper.toPredictionDTO(
                 predictionService.getPredictionByMatchId(matchId)
         );
+    }
+
+    @PostMapping("/generate")
+    public List<PredictionDTO> generatePredictions() {
+        predictionGenerationService.generatePredictions();
+
+        return predictionService.getAllPredictions()
+                .stream()
+                .map(DtoMapper::toPredictionDTO)
+                .toList();
     }
 }
